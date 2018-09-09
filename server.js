@@ -23,6 +23,8 @@ app.get('/calendar', function (req, res) {
 });
 
 app.post('/calendar', function (req, res) {
+    req.body.cost = parseInt(req.body.cost);
+  
     console.log(req.body);
     db.calendar.insert(req.body, function (err, doc) {
         res.json(doc);

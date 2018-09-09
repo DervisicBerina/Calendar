@@ -37,14 +37,12 @@ app.controller('myCtrl', ['$scope', '$http', 'toastr', function ($scope, $http, 
         });
     };
 
-    var costTotal = function(){
-      $http.get('/totalCost').then(function (response) {
-          $scope.juhu = response.data;
-          console.log($scope.juhu)
-      });
+    var costTotal = function () {
+        $http.get('/totalCost').then(function (response) {
+            $scope.juhu = response.data;
+            console.log($scope.juhu)
+        });
     }
-
-
     refresh();
     costTotal();
 
@@ -52,6 +50,7 @@ app.controller('myCtrl', ['$scope', '$http', 'toastr', function ($scope, $http, 
         $http.post('/calendar', $scope.event).then(function (response) {
             console.log(response);
             refresh();
+            costTotal();
             $scope.event.name = "";
             $scope.event.date = "";
             $scope.event.cost = "";
