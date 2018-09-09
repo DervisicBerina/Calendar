@@ -56,4 +56,24 @@ app.put('/calendar/:id', function (req, res) {
     );
 });
 
+app.get('/totalCost', urlencodedParser, function(req, res, next) {
+  db.calendar.aggregate({
+    $group: {
+      _id: '',
+      cost: { $sum: "$cost" }
+    }
+
+  },{
+   $project: {
+       _id: 0,
+       cost: 1
+   }
+}
+).toArray(function(err,docs){
+    if(err) throw err;
+    console.log("juhu " + docs[0].cost)
+    res.json(docs[0].cost)
+  })
+})
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

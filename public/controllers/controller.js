@@ -37,7 +37,16 @@ app.controller('myCtrl', ['$scope', '$http', 'toastr', function ($scope, $http, 
         });
     };
 
-    refresh()
+    var costTotal = function(){
+      $http.get('/totalCost').then(function (response) {
+          $scope.juhu = response.data;
+          console.log($scope.juhu)
+      });
+    }
+
+
+    refresh();
+    costTotal();
 
     $scope.submit = function () {
         $http.post('/calendar', $scope.event).then(function (response) {
@@ -73,5 +82,6 @@ app.controller('myCtrl', ['$scope', '$http', 'toastr', function ($scope, $http, 
             toastr.success('Item updated successfully');
         })
     };
+
 
 }]);
